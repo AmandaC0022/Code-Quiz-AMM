@@ -1,0 +1,78 @@
+:root {
+    --slate:#556270; 
+    --ocean:#4ECDC4; 
+    --lime:#C7F464; 
+    --blush:#FF6B6B; 
+    --cherry:#C44D58; 
+}
+body {
+    background-color: var(--slate); 
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px; 
+}
+
+
+.flexbox {
+    color: var(--ocean); 
+    font-size: 1.5em;
+    font-weight:bold; 
+    display: flex; 
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+h1 {
+    color: var(--blush); 
+    background-color: var(--slate);
+    font-size:2em; 
+    font-weight:bolder; 
+    text-align:center; 
+    padding-bottom: 2%; 
+}
+
+#view-highscores-btn {
+    cursor:pointer; 
+}
+
+main, form{
+    background-color: var(--ocean); 
+}
+
+button {
+    background-color: var(--blush);
+    padding:20px; 
+    font-size:1em; 
+    border-radius:20px; 
+    box-shadow:2px 2px 5px black; 
+    display:block;
+    margin: 0 auto; 
+    font-weight:bold; 
+    cursor: pointer;
+    
+} 
+
+p {
+    background-color: var(--ocean);
+    padding: 0 5% 5% 5%; 
+    text-align: center; 
+}
+
+.quiz-question {
+    background-color: var(--ocean); 
+    text-align: center; 
+    padding-top: 2%; 
+}
+
+.quiz-answers {
+    background-color: var(--ocean);
+    margin-left: 25%; 
+    margin-right: 25%; 
+    padding-bottom: 2%; 
+    line-height: 1.5em;
+}
+
+label:hover {
+    background-color:#C7F464; 
+    cursor: pointer;
+}
+

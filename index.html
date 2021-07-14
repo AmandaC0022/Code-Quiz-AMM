@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <title>Coding Quiz Game</title>
+</head>
+<body>
+    <!-- nav bar -->
+    <nav class="flexbox">
+        <!-- View Highscores -->
+        <h4 id="view-highscores-btn">View Highscores</h4>
+        <h4 id="score-counter">Score: 0</h4>
+    </nav>
+    <main>
+        <h1>Coding Quiz Challenge</h1>
+        <p>Try out your new coding knowledge by answering the following questions. The quicker you answer them correctly, the higher your score.</p>
+        <button>Start the Quiz</button>
+    </main>
+    <form class="quiz-box">
+        <h3 class="quiz-question">What is the command we use to create a new file in the command line?</h3>
+        <div class="quiz-answers">
+            <input type="radio" id="answer1" name="new-file" value="touch"> 
+            <label for="answer1">touch</label><br>
+            <input type="radio" id="answer2" name="new-file" value="touch"> 
+            <label for="answer2">cd</label><br>
+            <input type="radio" id="answer3" name="new-file" value="touch"> 
+            <label for="answer3">mkdir</label><br>
+            <input type="radio" id="answer4" name="new-file" value="touch"> 
+            <label for="answer4">pwd</label><br>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
