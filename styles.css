@@ -46,7 +46,7 @@ button {
     margin: 0 auto; 
     font-weight:bold; 
     cursor: pointer;
-    display:none; 
+    /* display:none;  */
 } 
 /*text explaination*/ 
 p {
@@ -56,7 +56,7 @@ p {
     border:2px solid white; 
     padding: 5%; 
     text-align: center; 
-    display:none; 
+    /* display:none;  */
 }
 
 .quiz-question { 
@@ -78,7 +78,7 @@ p {
 }
 
 .question1 {
-    /* display:none;  */
+    display:none; 
 
 }
 
