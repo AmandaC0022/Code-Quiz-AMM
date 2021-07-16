@@ -3,7 +3,6 @@
     --ocean:#4ECDC4; 
     --lime:#C7F464; 
     --blush:#FF6B6B; 
-    --cherry:#C44D58; 
 }
 
 body {
@@ -46,7 +45,6 @@ button {
     margin: 0 auto; 
     font-weight:bold; 
     cursor: pointer;
-    /* display:none;  */
 } 
 /*text explaination*/ 
 p {
@@ -56,58 +54,33 @@ p {
     border:2px solid white; 
     padding: 5%; 
     text-align: center; 
-    /* display:none;  */
 }
 
-.quiz-question { 
+#question-title { 
     text-align: center; 
     padding: 2%; 
-}
-.quiz-box {
     background-color: var(--ocean); 
-    margin-left:25%; 
-    margin-right: 25%; 
+    margin: 0 20%; 
     border: 2px solid white; 
-    border-radius: 25px; 
-}
-.quiz-answers {
-    margin-left: 25%; 
-    margin-right: 25%; 
-    padding-bottom: 2%; 
-    line-height: 1.5em;
-}
-
-.question1 {
-    display:none; 
-
-}
-
-.question2 {
+    font-size: 1.25em;
+    font-weight: bold;
+    border-radius: 25px;  
     display:none; 
 }
 
-.question3 {
-    display:none; 
+.choice {
+ margin: 2% auto;  
+ font-size: 1em; 
 }
 
-.question4 {
-    display:none; 
-}
-
-.question5 {
-    display:none; 
-}
-
-.question6 {
-    display:none; 
-}
 /*hover over the quiz answers*/ 
-label:hover {
-    background-color:#C7F464; 
+.choice:hover { 
     cursor: pointer;
+    background-color: var(--lime);
 }
 
-h4:hover {
+/* View Highscores Link */
+#view-highscores-btn:hover {
     color: var(--lime); 
 }
 
