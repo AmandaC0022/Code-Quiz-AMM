@@ -67,12 +67,30 @@ p {
     border-radius: 25px;  
     display:none; 
 }
-
-.choice {
+input {
+    text-align: center;
+    margin: 0 auto; 
+    display:block; 
+    width:30%; 
+    height: 3%; 
+    margin-bottom: 2%;
+    font-size: 1.25em;
+    background-color: var(--lime);  
+}
+.user-choice {
  margin: 2% auto;  
  font-size: 1em; 
 }
 
+#initials-input {
+    text-align: center;
+    font-size: 1.25em;
+}
+
+#highscore-screen {
+    text-align: center;
+    
+}
 /*hover over the quiz answers*/ 
 .choice:hover { 
     cursor: pointer;
