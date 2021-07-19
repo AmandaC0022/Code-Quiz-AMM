@@ -1,5 +1,3 @@
-// Goal: all questions in an array and cycle through them 
-
 // links to HTML
 var questionTitle = document.getElementById('question-title');  
 var questionChoices = document.getElementById("choices"); 
@@ -8,26 +6,26 @@ var startButton = document.getElementById("start-button");
 var timerId = document.getElementById("score-counter");  
 var endScreen = document.getElementById('end-screen'); 
 var initialsInput = document.getElementById('initials-input'); 
-var userInput = document.getElementsByClassName('user-input'); 
 var highscoreScreen = document.getElementById("highscore-screen"); 
 var highscoreBtn = document.getElementById("view-highscores-btn"); 
 
 //Global Variables  
 var timerCount = 60; 
-var isWin = false;
+var isWin = false; 
+var input; 
 
 timerId.textContent = "Score: " + timerCount;
 // Question Objects to cycle through, 6 questions total 
 var myQuestions = [
     { //questionIndex = 0
-        title:"What is the command we use to create a new file in the command line?", 
-        choices:['touch' , 'cd' , 'mkdir' , 'pwd'], 
-        answer:'touch', 
+        title:"Inside which HTML element do we put the JavaScript?", 
+        choices:['<style>' , '<head>' , '<meta>' , '<script>'], 
+        answer:'<script>', 
     },
     { //questionIndex = 1
-        title: "Which of the following is not a component of the box model?", 
-        choices: ['The Content', 'The Display Property', 'The Border Property', 'The Padding Property'], 
-        answer: 'The Display Property', 
+        title: "Which of the following is not a JavaScript Data Types?", 
+        choices: ['Undefined', 'Number', 'Boolean', 'Float'], 
+        answer: 'Float', 
     },
     { //questionIndex = 2
         title: "In JavaScript, what operator is used to assign a value to a declared variable?", 
@@ -52,9 +50,12 @@ startButton.onclick = startGame;
 function startGame() {
     //calls the countdown function 
     countdown(); 
+    timerCount = 60; 
     isWin = false; 
+    questionIndex = 0; 
     //change screens - hide the start screen 
     beginningScreen.setAttribute("style", 'display:none');
+    highscoreScreen.setAttribute("style", "display:none"); 
     //unhide the question screen 
     questionTitle.setAttribute("style", "display:block");  
     questionChoices.setAttribute("style", "display:block"); 
@@ -62,6 +63,24 @@ function startGame() {
     showQuestion();   
 } 
 
+//controls countdown timer and score 
+function countdown() {
+    timer = setInterval(function() {
+        timerCount--;
+        timerId.textContent = "Score: " + timerCount; 
+        if (isWin && timerCount >= 0) {
+            //stops the timer and goes to the quizOver screen 
+            clearInterval(timer); 
+            quizOver(); 
+        } 
+        //when timer reaches 0, go to quizOver screen 
+        if (timerCount === 0) {
+            //stops the timer and goes to the quizOver screen 
+            clearInterval(timer); 
+            quizOver(); 
+        }
+    }, 1000);  
+}
 var questionIndex = 0;
 //links activeQuestion to myQuestions Array 
 var activeQuestion = {
@@ -128,77 +147,67 @@ function quizOver() {
     var endScreenText = document.createElement('h1'); 
     endScreenText.textContent = "Game Over!"; 
     endScreen.append(endScreenText); 
-    //Final Score Text 
-    var finalScoreText = document.createElement('p'); 
-    finalScoreText.textContent = "Your final score is: " + timerCount + "."; 
-    endScreen.append(finalScoreText); 
     //initials Input 
     initialsInput.setAttribute("style", 'display:block'); 
     var initialsText = document.createElement('p'); 
     initialsText.textContent = "Enter your initials below to save your Highscore!"; 
     initialsInput.append(initialsText); 
     //Input Area 
-    input = document.createElement("input");    
-    initialsInput.append(input); 
+    input = document.createElement("input");     
+    initialsInput.append(input);   
     //created add button 
-    var initialsBtn = document.createElement("button");  
-    initialsBtn.textContent = "Add"; 
-    initialsInput.append(initialsBtn); 
+    var addBtn = document.createElement("button");  
+    addBtn.textContent = "Add"; 
+    initialsInput.append(addBtn); 
     //calls highScore function when user presses Add 
-    initialsBtn.onclick = highScore; 
+    addBtn.onclick = highScore; 
+}
+//empty object to store multiple players scores in 
+var highScoreObject = {
+    players:[], 
+    scores:[], 
 }
 
-function countdown() {
-    timer = setInterval(function() {
-        timerCount--;
-        timerId.textContent = "Score: " + timerCount; 
-        if (isWin && timerCount >= 0) {
-            //stops the timer and goes to the quizOver screen 
-            clearInterval(timer); 
-            quizOver(); 
-        } 
-        //when timer reaches 0, go to quizOver screen 
-        if (timerCount === 0) {
-            //stops the timer and goes to the quizOver screen 
-            clearInterval(timer); 
-            quizOver(); 
-        }
-    }, 1000);  
-}
+function highScore() { 
+    //hide initial's input screen 
+    initialsInput.setAttribute('style', 'display:none'); 
+    //create userInitials 
+    userInitials = input.value;  
+    //create userScore 
+    userScore = timerCount; 
+    //adds userInitials and Scores to highScoreObject 
+    highScoreObject.players.push(userInitials);
+    highScoreObject.scores.push(timerCount);  
+    //add Player Initials and Score to local storage 
+    localStorage.setItem("initials", highScoreObject.players); 
+    localStorage.setItem("score", highScoreObject.scores);  
+    //Final Score Text 
+    var finalScoreText = document.createElement('p'); 
+    finalScoreText.textContent = userInitials + "'s final score is: " + timerCount + "."; 
+    endScreen.append(finalScoreText); 
+    //OK button 
+    var btn = document.createElement('button'); 
+    btn.textContent = "Ok"; 
+    endScreen.append(btn); 
+    btn.onclick = viewHighScore; 
+}; 
 
 function viewHighScore() {
-    //when you click on view highscores it: 
     // hides current screen  
     beginningScreen.setAttribute('style', 'display:none'); 
     endScreen.setAttribute('style', 'display:none'); 
     initialsInput.setAttribute('style', 'display:none'); 
     //displays High Score Screen 
     highscoreScreen.setAttribute('style', 'display:block'); 
+    //Top Scorers: 
     var topScorers = document.createElement('h1'); 
     topScorers.textContent = "Top Scores:"; 
     highscoreScreen.append(topScorers); 
+    //shows score 
     var topScoresInfo = document.createElement('p'); 
-    topScoresInfo.textContent = localStorage.getItem('initials') + ": " + localStorage.getItem('score'); 
-    highscoreScreen.append(topScoresInfo); 
+    topScoresInfo.textContent = localStorage.getItem('initials') + ": " + localStorage.getItem('score');  
+    highscoreScreen.append(topScoresInfo);  
 }
 
+//When you click on the View Highscores text, it takes you to the Highscores page 
 highscoreBtn.onclick = viewHighScore; 
-
-function highScore() { 
-    //save both initials and score into an object then push them into the local storage 
-    
-
-
-    // userInitials = input.value; 
-    // highScoreObject.initials.push(userInitials); 
-    // highScoreObject.userScore.push(timerCount); 
-    // //highScoreObject.userScore = localStorage.getItem('score'); 
-    // initialsInput.textContent = highScoreObject.initials + ": " + highScoreObject.userScore;
-    // localStorage.setItem("initials", userInitials); 
-    // localStorage.setItem("score", timerCount);  
-    
-    // var btn = document.createElement('button'); 
-    // btn.textContent = "Ok"; 
-    // initialsInput.append(btn); 
-    // btn.onclick = viewHighScore; 
-}; 
